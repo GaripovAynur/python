@@ -1,0 +1,108 @@
+
+"""Regex - предназначено для работы с регулярными выражениями, содержащий в модуль re
+    \d  - от 0 до 9
+    \D - любой символ, только не от 0 до 9
+    \w - Буква, цифра и символ подчеркивания
+    \W - Любой символ, не яв-ся буквой, цифрой и символом подчеркивания
+    \s - Символ пробела, табуляции или новой строки
+    \S - Любой символ, не яв-ся символом пробела, табуляции или новой строки
+    re.compile(r'\d+\s\w+') #соотвествует, 12 drummers"""
+
+
+import re
+
+phoneNumRegex = re.compile(r'\d{3}-\d{3}-\d{4}')        # или \d\d\d-\d\d\d-\d\d\d\d
+mo = phoneNumRegex.search('МОй НОМЕР : 324-354-3581.')
+print('Найденный телефонный номер: '  + mo.group())     #айденный телефонный номер: 324-354-3581
+
+
+"""Создание группы с помощью (), (\d\d\d)-(\d\d\d-\d\d\d\d)
+ group() -  (\d\d\d)-(\d\d\d-\d\d\d\d)
+ group(0) - (\d\d\d)-(\d\d\d-\d\d\d\d)
+ group(1) - (\d\d\d)
+ group(2) - (\d\d\d-\d\d\d\d)"""
+
+
+""" | - символ канал, для алтернативных групп """
+heroRegex = re.compile(r'Batman | Tine Fey')
+mo1 = heroRegex.search('Batman and Tine Fey.')
+print(mo1.group()) # 'print: Batman, search выводится тот который встретится первый
+mo2 = heroRegex.findall('Batman and Tine Fey.')
+print(mo2) # 'print: ['Batman ', ' Tine Fey'], findall выводится тот который встретится первый
+
+
+""" ? - поиск не обязательного соответствия,
+ если необходимо найти сам символ ? то необходимо писать \? """
+batRegex = re.compile(r'Bat(wo)?man')
+mo1 = batRegex.search('The Adventures of Batman')
+mo2 = batRegex.search('The Adventures of Batwoman')
+print(mo1.group()) #print: Batman
+print(mo2.group()) #print: Batwoman
+
+""" * - смивол означает что (wo)* может быть 0 или неограниченное кол-во"""
+batRegex = re.compile(r'Bat(wo)*man')
+mo1 = batRegex.search('The Adventures of Batman')
+mo2 = batRegex.search('The Adventures of Batwowowowowowowowoman')
+print(mo1.group()) #print: Batman
+print(mo2.group()) #print: Batwowowowowowowowoman
+
+
+""" + - смивол означает что (wo)+ может быть 1 или неограниченное кол-во"""
+batRegex = re.compile(r'Bat(wo)+man')
+mo1 = batRegex.search('The Adventures of Batman')
+mo2 = batRegex.search('The Adventures of Batwowowowowowowowoman')
+#print(mo1.group()) #print: Ошибка
+print(mo2.group()) #print: Batwowowowowowowowoman
+
+
+""" {} - указание соответсвтия определенному кол-ву повторений групп 
+(Ha){3} -  (Ha) (Ha) (Ha)     
+(Ha){3,5} - (Ha) (Ha) (Ha) | (Ha) (Ha) (Ha) (Ha) | (Ha) (Ha) (Ha) (Ha) (Ha)"""
+haRegex = re.compile(r'(Ha){3}')
+mo1 = haRegex.search('HaHaHa')
+mo2 = haRegex.search('HaHa')
+print(mo1.group()) # HaHaHa
+# print(mo2.group()) # ошибка
+
+
+"""Жадный и нежадный виды поиска"""
+# Жадный
+ghare = re.compile(r'(Ha){3,5}')
+mo1 = ghare.search('HaHaHaHa')
+print(mo1.group()) #HaHaHaHa
+#Нежадный
+ghare = re.compile(r'(Ha){3,5}?')
+mo1 = ghare.search('HaHaHaHa')
+print(mo1.group()) #HaHaHa
+
+
+"""Создание собственных символьных классов"""
+vre = re.compile(r'[aeiouAEIOU]') # вывод всех гласных букв
+mo1 = vre.findall('Rgd fweunb wefasdg grhst 6hbffsdf.')
+print(mo1) #['e', 'u', 'e', 'a']
+
+vre = re.compile(r'[^aeiouAEIOU]') # вывод всех букв что не отсносится aeiouAEIOU
+mo1 = vre.findall('Rgd fweunb wefasdg grhst 6hbffsdf.')
+print(mo1) #['R', 'g', 'd', ' ', 'f', 'w', 'n', 'b', ' ', 'w', 'f', 's', 'd', 'g', ' ', 'g', 'r', 'h', 's', 't', ' ', '6', 'h', 'b', 'f', 'f', 's', 'd', 'f', '.']
+
+""" ^ - в начале ругелярного выражения для указания того что должно находиться в начале тестируемого текста
+    $ - конец регулярного выражения      """
+bghello = re.compile(r'^Hello')
+bghello.search('Hello world!') # True
+
+bghello = re.compile(r'\d$')
+bghello.search('Hello world is 42!') # True
+
+bghello = re.compile(r'^\d+$')
+bghello.search('432423isre42') # True
+
+"""  . - групповой символ, показывает только один символ
+     .* - несколько символов    """
+at = re.compile(r'.at')
+s = at.findall('cat, flat') #['cat', 'lat']
+print(s)
+
+at = re.compile(r'.*at')
+s = at.findall('cat, flat')
+print(s) #['cat, flat']
+
