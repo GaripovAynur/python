@@ -11,6 +11,10 @@ helloFile = open(r'C:\Users\a.garipov\PycharmProjects\untitled2\1.txt', 'a') #о
 helloFile.close() #закрыть файл
 
 
+import shelve #сохранять переменные в двоичных файлах-храналищах.
+
+
+
 
 
 
