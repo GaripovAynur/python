@@ -1,16 +1,20 @@
-import os
+helloFile = open(r'C:\Users\a.garipov\PycharmProjects\untitled2\1.txt') #открыть файл
+readfile = helloFile.read() # Прочитать содержимое файла
+readfile = helloFile.readlines() #тоже самое что read, но все строчки в одной линии
 
-os.path.join('usr', 'bin', 'spam') #в зависимости какая ОС, будет вставлять \\ /
+helloFile = open(r'C:\Users\a.garipov\PycharmProjects\untitled2\1.txt', 'w') #открыть файл в режиме перезаписи
+Пример: helloFile.write('Dobavit znachenie') # кол-во символов 25
 
-import os
-myFiles = ['account.txt', 'details.csv', 'invite.docx']
-for filename in myFiles:
-	print(os.path.join('usr', 'bin', filename))
-  # вывод: usr\bin\account.txt
-          usr\bin\details.csv
-          usr\bin\invite.docx
+helloFile = open(r'C:\Users\a.garipov\PycharmProjects\untitled2\1.txt', 'a') #открыть файл в режиме добавления
+Пример: helloFile.write('Dobavit znachenie') # кол-во символов 125
+
+helloFile.close() #закрыть файл
 
 
-os.getcwd() # Вывод текущего каталога Пример C:\\Python
-os.chdir('C:\\book') #Изменение текущего каталога
-os.makedirs('C:\\walnut\\waffles') #Создает папку, в т.ч. промежуточные
+
+
+
+
+
+
+
