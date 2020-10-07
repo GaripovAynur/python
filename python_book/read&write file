@@ -1,0 +1,16 @@
+import os
+
+os.path.join('usr', 'bin', 'spam') #в зависимости какая ОС, будет вставлять \\ /
+
+import os
+myFiles = ['account.txt', 'details.csv', 'invite.docx']
+for filename in myFiles:
+	print(os.path.join('usr', 'bin', filename))
+  # вывод: usr\bin\account.txt
+          usr\bin\details.csv
+          usr\bin\invite.docx
+
+
+os.getcwd() # Вывод текущего каталога Пример C:\\Python
+os.chdir('C:\\book') #Изменение текущего каталога
+os.makedirs('C:\\walnut\\waffles') #Создает папку, в т.ч. промежуточные
