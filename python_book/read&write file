@@ -12,12 +12,10 @@ helloFile.close() #закрыть файл
 
 
 import shelve #сохранять переменные в двоичных файлах-храналищах.
-
-
-
-
-
-
+shelfFile = shelve.open('mydata')
+cats = ['Zophie', 'Pooka', 'Simon']
+shelfFile['cats'] = cats
+shelfFile.close() # Создается три файла mydata.bak, mydata.dat, mydata.dir
 
 
 
