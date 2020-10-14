@@ -3,11 +3,11 @@
 
 import shutil, os, re
 
-datePattern = re.compile(r"""^(.*?)
-    ((0|1)?\d)-
-    ((0|1|2|3)?\d-
-    ((19|20)\d\d)
-    (.*?)$
+datePattern = re.compile(r"""^(.*?) #group(1)
+    ((0|1)?\d)-                     #group(2) group(3)
+    ((0|1|2|3)?\d-                  #group(4) group(5)
+    ((19|20)\d\d)                   #group(6) group(7)
+    (.*?)$                          #group(8)
     """, re.VERBOSE)
 
 for amerFilename in os.listdir('.'):
@@ -19,13 +19,6 @@ for amerFilename in os.listdir('.'):
     dayPart = mo.group(4)
     yearPart = mo.group(6)
     afterPart = mo.group(8)
-
-'''datePattern = re.compile(r"""^(1)
-    (2 (3) )-
-    (4 (5) )-
-    (6 (7) )-
-    (8)$
-    """, re.VERBOSE)'''
 
     euroFilename = beforePart + dayPart + '-' + monthPart + '-' + yearPart + afterPart
 
