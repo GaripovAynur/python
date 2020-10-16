@@ -1,4 +1,4 @@
-"""ZIPовать из C:\\Users все jpg|pdf файлы
+"""ZIPовать C:\\Users все jpg|pdf файлы
    или shutil.copy копировать все в одну папку"""
 
 
