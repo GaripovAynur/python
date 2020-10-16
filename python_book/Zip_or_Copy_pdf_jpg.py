@@ -3,7 +3,7 @@
 
 
 import os, zipfile, re, shutil
-os.chdir('C:\\book')
+os.chdir('C:\\book')                                         # Меняет текущую папку
 pdf = re.compile(r'(\w)+(\.)(jpg|pdf)')
 z = zipfile.ZipFile('spam.zip', 'w')
 count = 1
